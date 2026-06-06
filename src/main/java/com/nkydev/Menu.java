@@ -6,13 +6,11 @@ public class Menu {
 
     public void showMenu() {
         Scanner keyword = new Scanner(System.in);
-        System.out.println("===========================================================");
-        System.out.println("            Welcome to Sales Management System!            ");
-        System.out.println("===========================================================\n");
-        System.out.println("1. Create a client");
-        System.out.println("2. Create a product");
-        System.out.println("3. Create an order");
-        System.out.println("4. Add a product to the order");
+        System.out.println("\n===== Sales Management System =====\n");
+        System.out.println("1. Create customer");
+        System.out.println("2. Create product");
+        System.out.println("3. Create order");
+        System.out.println("4. Add product to the order");
         System.out.println("5. Show orders");
         System.out.println("6. Show products");
         System.out.println("7. Exit");
