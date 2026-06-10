@@ -46,4 +46,15 @@ public class Order {
     public void setTotalAmount(float totalAmount) {
         this.totalAmount = totalAmount;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", customer=" + customer +
+                ", creationDate=" + creationDate +
+                ", status=" + status +
+                ", totalAmount=" + totalAmount +
+                '}';
+    }
 }
