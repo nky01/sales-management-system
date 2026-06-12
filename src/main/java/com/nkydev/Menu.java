@@ -30,6 +30,7 @@ public class Menu {
             case 1 -> createCustomer();
             case 2 -> showCustomers();
             case 3 -> createProduct();
+            case 4 -> showProducts();
             case 8 -> System.out.println("Thank you & goodbye!");
             default -> System.out.println("Incorrect option. Try again...");
         }
@@ -92,5 +93,15 @@ public class Menu {
 
         System.out.println("===================================");
         System.out.println("Great! Product was created");
+    }
+
+    public void showProducts(){
+        if (!products.isEmpty()) {
+            for (int i = 0; i < products.size(); i++) {
+                System.out.println(products.get(i).toString());
+            }
+        } else {
+            System.out.println("It doesn't exit products yet. Go back and select '3. Create product'");
+        }
     }
 }
