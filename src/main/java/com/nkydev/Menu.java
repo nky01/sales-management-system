@@ -1,9 +1,8 @@
 package com.nkydev;
 
-import javax.smartcardio.CardTerminal;
 import java.awt.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Menu {
@@ -31,6 +30,7 @@ public class Menu {
             case 2 -> showCustomers();
             case 3 -> createProduct();
             case 4 -> showProducts();
+            case 5 -> createOrder();
             case 8 -> System.out.println("Thank you & goodbye!");
             default -> System.out.println("Incorrect option. Try again...");
         }
@@ -103,5 +103,44 @@ public class Menu {
         } else {
             System.out.println("It doesn't exit products yet. Go back and select '3. Create product'");
         }
+    }
+
+    ArrayList<Order> orders= new ArrayList<>();
+    public void createOrder(){
+        Scanner keyword = new Scanner(System.in);
+
+        System.out.println("========= Create order =========");
+        System.out.println("Enter the next information: ");
+        System.out.println("Id: ");
+        int id = keyword.nextInt();
+        System.out.print("Customer name: ");
+        String kCustomer = keyword.next();
+        Customer customer = null;
+        for (int i = 0; i < customers.size(); i++) {
+            if (kCustomer.equals(customers.get(i).getName())) {
+                customer = customers.get(i);
+            }
+        }
+        if (customer == null){
+            System.out.println("Customer not found");
+            return;
+        }
+        System.out.print("Creation date (yyyy-mm-dd): ");
+        LocalDate localDate = null;
+        String kDate = keyword.next();
+        if (!kDate.isEmpty()){
+            localDate = LocalDate.parse(kDate);
+        } else {
+            System.out.println("Date not found. Try again...");
+        }
+        System.out.print("Status (pending / paid / cancelled): ");
+        String kStatus= keyword.next();
+        Status status = Status.valueOf(kStatus.trim().toUpperCase());
+        System.out.println("Total amount: ");
+        float totalAmount = keyword.nextFloat();
+
+        Order order = new Order(id, customer, localDate, status, totalAmount);
+        orders.add(order);
+        System.out.println("Great! Order was created");
     }
 }
