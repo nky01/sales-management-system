@@ -31,6 +31,7 @@ public class Menu {
             case 3 -> createProduct();
             case 4 -> showProducts();
             case 5 -> createOrder();
+            case 6 -> showOrders();
             case 8 -> System.out.println("Thank you & goodbye!");
             default -> System.out.println("Incorrect option. Try again...");
         }
@@ -43,13 +44,13 @@ public class Menu {
 
         System.out.println("========= Create customer =========");
         System.out.println("Enter the next information:");
-        System.out.print("id: ");
+        System.out.print("Id: ");
         int id = keyword.nextInt();
-        System.out.print("name: ");
+        System.out.print("Name: ");
         String name = keyword.next();
-        System.out.print("email: ");
+        System.out.print("Email: ");
         String email = keyword.next();
-        System.out.print("phone number: ");
+        System.out.print("Phone number: ");
         String phone = keyword.next();
 
         Customer customer= new Customer(id, name, email, phone);
@@ -76,15 +77,15 @@ public class Menu {
 
         System.out.println("========= Create product =========");
         System.out.println("Enter the next information:");
-        System.out.print("id: ");
+        System.out.print("Id: ");
         int id = keyword.nextInt();
-        System.out.print("name: ");
+        System.out.print("Name: ");
         String name = keyword.next();
-        System.out.print("price: ");
+        System.out.print("Price: ");
         float price = keyword.nextFloat();
-        System.out.print("stock: ");
+        System.out.print("Stock: ");
         int stock = keyword.nextInt();
-        System.out.print("category of the product (electronics / home / sports / clothing): ");
+        System.out.print("Category of the product (electronics / home / sports / clothing): ");
         String kCategory = keyword.next();
         Category category = Category.valueOf(kCategory.trim().toUpperCase());
 
@@ -111,13 +112,13 @@ public class Menu {
 
         System.out.println("========= Create order =========");
         System.out.println("Enter the next information: ");
-        System.out.println("Id: ");
+        System.out.print("Id: ");
         int id = keyword.nextInt();
         System.out.print("Customer name: ");
         String kCustomer = keyword.next();
         Customer customer = null;
         for (int i = 0; i < customers.size(); i++) {
-            if (kCustomer.equals(customers.get(i).getName())) {
+            if (kCustomer.equalsIgnoreCase(customers.get(i).getName())) {
                 customer = customers.get(i);
             }
         }
@@ -136,11 +137,21 @@ public class Menu {
         System.out.print("Status (pending / paid / cancelled): ");
         String kStatus= keyword.next();
         Status status = Status.valueOf(kStatus.trim().toUpperCase());
-        System.out.println("Total amount: ");
+        System.out.print("Total amount: ");
         float totalAmount = keyword.nextFloat();
 
         Order order = new Order(id, customer, localDate, status, totalAmount);
         orders.add(order);
         System.out.println("Great! Order was created");
+    }
+
+    public void showOrders(){
+        if (!orders.isEmpty()){
+            for (int i = 0; i < orders.size(); i++) {
+                System.out.println(orders.get(i));
+            }
+        } else {
+            System.out.println("It doesn't exist any orders yet");
+        }
     }
 }
