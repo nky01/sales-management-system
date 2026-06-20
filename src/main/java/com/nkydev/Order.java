@@ -1,19 +1,21 @@
 package com.nkydev;
+import java.awt.color.ProfileDataException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Order {
     private int id;
     private Customer customer;
     private LocalDate creationDate;
     private Status status;
-    private float totalAmount;
+    ArrayList<Product> products;
 
-    public Order(int id, Customer customer, LocalDate creationDate, Status status, float totalAmount) {
+    public Order(int id, Customer customer, LocalDate creationDate, Status status, ArrayList<Product> products) {
         this.id = id;
         this.customer = customer;
         this.creationDate = creationDate;
         this.status = status;
-        this.totalAmount = totalAmount;
+        this.products = products;
     }
 
     public int getId() {
@@ -40,21 +42,21 @@ public class Order {
     public void setStatus(Status status) {
         this.status = status;
     }
-    public float getTotalAmount() {
-        return totalAmount;
+    public ArrayList<Product> getProducts() {
+        return products;
     }
-    public void setTotalAmount(float totalAmount) {
-        this.totalAmount = totalAmount;
+    public void setProducts(ArrayList<Product> products) {
+        this.products = products;
     }
 
     @Override
     public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", customer=" + customer +
-                ", creationDate=" + creationDate +
-                ", status=" + status +
-                ", totalAmount=" + totalAmount +
-                '}';
+        return "--------------------------------" +
+                "\nID: " + id +
+                "\nCustomer: " + customer.getName() +
+                "\nCreation date: " + creationDate +
+                "\nStatus: " + status +
+                "\nProducts: " + products +
+                "\n--------------------------------\n";
     }
 }

@@ -12,7 +12,9 @@ public class Menu {
         int option = 0;
 
         while (option != 8) {
-            System.out.println("\n===== Sales Management System ======\n");
+            System.out.println("\n===================================");
+            System.out.println("     Sales Management System       ");
+            System.out.println("===================================");
             System.out.println("1. Create customer");
             System.out.println("2. Show customers");
             System.out.println("3. Create product");
@@ -20,7 +22,7 @@ public class Menu {
             System.out.println("5. Create order");
             System.out.println("6. Show orders");
             System.out.println("7. Add product to order");
-            System.out.println("8. Exit");
+            System.out.println("\n8. Exit\n");
             System.out.println("===================================");
             System.out.print("\nSelect an option: ");
             option = keyword.nextInt();
@@ -32,6 +34,7 @@ public class Menu {
             case 4 -> showProducts();
             case 5 -> createOrder();
             case 6 -> showOrders();
+            case 7 -> addProductToOrder();
             case 8 -> System.out.println("Thank you & goodbye!");
             default -> System.out.println("Incorrect option. Try again...");
         }
@@ -107,8 +110,10 @@ public class Menu {
     }
 
     ArrayList<Order> orders= new ArrayList<>();
+
     public void createOrder(){
         Scanner keyword = new Scanner(System.in);
+        ArrayList<Product> product = new ArrayList<>();
 
         System.out.println("========= Create order =========");
         System.out.println("Enter the next information: ");
@@ -137,10 +142,8 @@ public class Menu {
         System.out.print("Status (pending / paid / cancelled): ");
         String kStatus= keyword.next();
         Status status = Status.valueOf(kStatus.trim().toUpperCase());
-        System.out.print("Total amount: ");
-        float totalAmount = keyword.nextFloat();
 
-        Order order = new Order(id, customer, localDate, status, totalAmount);
+        Order order = new Order(id, customer, localDate, status, product);
         orders.add(order);
         System.out.println("Great! Order was created");
     }
@@ -152,6 +155,26 @@ public class Menu {
             }
         } else {
             System.out.println("It doesn't exist any orders yet");
+        }
+    }
+
+    public void addProductToOrder(){
+        Scanner keyword = new Scanner(System.in);
+
+        System.out.println("========= Add products to order =========");
+        System.out.print("Order ID: ");
+        int orderId = keyword.nextInt();
+        System.out.print("Product ID: ");
+        int productId = keyword.nextInt();
+        System.out.println("\n");
+        for (int i = 0; i < orders.size(); i++) {
+            if (orders.get(i).getId() == orderId) {
+                for (int j = 0; j < products.size(); j++) {
+                    if (products.get(j).getId() == productId){
+                        orders.get(i).getProducts().add(products.get(j));
+                    }
+                }
+            }
         }
     }
 }
